@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="utf-8">
+        <title>RAD-Seq</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css">
+
+        <!--Font awesome CSS-->
+        <link rel="stylesheet" href="../../lib/fontawesome/css/all.css">
+
+        <!--My CSS-->
+        <link rel="stylesheet" type="text/css" href="../css/styles.css">
+
+        <!-- Chart js script -->
+        <script src="../../lib/chartjs/js/chart.min.js"></script>
+    </head>
+    <body>
+        <!---------------- Analysis Input Popup ----------------->
+        <div class="rad-shadow display-none" id="infoShadow"></div>
+        <div class="rad-popup-box display-none" id="analysisInfoPopup">
+            <div class="rad-popup-header">
+                <h4>Analysis Properties</h4>
+            </div>
+            <div class="rad-popup-body">
+                <div class="rad-popup-content">
+                    <label class="rad-def-label" style="margin-top: 0px">Restriction Enzyme -</label>
+                    <p>
+                        The restriction enzyme input allows you to select a restriction enzyme that you have previously uploaded which has a predetermined restriction site attached to it. Alternatively, you can select &lt;&lt;custom&gt;&gt; to enter a custom restriction site instead.
+                    </p>
+                    <label class="rad-def-label">Restriction Site -</label>
+                    <p>
+                        The restriction site input, if set to &lt;&lt;custom&gt;&gt;, allows you to specify a restriction site to be targeted during the enzyme digest.
+                        <br><br>
+                        By default, if having an even length, the restriction site will be sliced down the middle. Otherwise, it will be sliced one index to the left of the middle character.
+                        <br><br>
+                        <label class="rad-ex-label">Even length example:</label>
+                        -------------<br>
+                        Example Input: AGCT<br>
+                        -------------<br>
+                        Result: AG CT<br>
+                        -------------<br>
+                        <br>
+                        <label class="rad-ex-label">Odd length example</label>
+                        -------------<br>
+                        Example Input: AGCAT<br>
+                        -------------<br>
+                        Result: AG CAT<br>
+                        -------------<br>
+                        <br>
+                        Alternatively, you can specify the slice index by using the "pipe" symbol. You can put the "pipe" symbol at the beginning, end, or between two characters to specify where you would like the slice to occur.
+                        <br><br>
+                        <label class="rad-ex-label">Pipe symbol example</label>
+                        -------------<br>
+                        Example Input: T|CGA<br>
+                        -------------<br>
+                        Result: T CGA<br>
+                        -------------<br>
+                    </p>
+                    <label class="rad-def-label">Double Digest -</label>
+                    <p>
+                        The double digest input checkbox allows you to specify two restriction enzymes instead of one to perform a double enzyme digest.
+                    </p>
+                    <label class="rad-def-label">Genome File -</label>
+                    <p>
+                        The genome file input allows you to select a file to perform the analysis on. This file can be any kind of text file(including .fasta) that contains a genome dna sequence.
+                    </p>
+                    <label class="rad-def-label">Slice probability -</label>
+                    <p>
+                        The slice probability input allows you to determine what % chance a target site has to be sliced. You can specify a value for this input between the ranges 0.001 - 1.000(0.1% - 100%).
+                    </p>
+                </div>
+            </div>
+            <div class="rad-popup-footer">
+                <button class="btn btn-primary rad-popup-close-btn" type="button" onclick="closeAnalysisInfoPopup()">Close</button>
+            </div>
+        </div>
+
+        <!---------------- Graph Input Popup ----------------->
+        <div class="rad-popup-box display-none" id="graphInfoPopup">
+            <div class="rad-popup-header">
+                <h4>Graph Properties</h4>
+            </div>
+            <div class="rad-popup-body">
+                <div class="rad-popup-content">
+                    <label class="rad-def-label" style="margin-top: 0px">Graph X and Y definitions: </label>
+                    <p>
+                        Graph X: Represents the fragment length distributions.
+                        <br>
+                        Graph Y: Represents the amount of fragments in a fragment length distribution.
+                        <br>
+                        <a id="rad_graph_link" href="#">Example Output</a>
+                    </p>
+                    <br>
+                    <label class="rad-def-label" style="margin-top: 0px">Graph Range -</label>
+                    <p>
+                        The graph range min input allows you to specify the begin x range of the entire graph.
+                        <br>
+                        The graph range max input allows you to specify the end x range of the entire graph.
+                    </p>
+                    <label class="rad-def-label">Focus Range -</label>
+                    <p>
+                        The focus range min input allows you to specify the begin x of a range within the graph range.
+                        <br>
+                        The focus range max input allows you to specify the end x of a range within the graph range.
+                        <br><br>
+                        This range will typically be the range you are most interested in. By specifying this range, you will be able to see the fragment count and fragment percentage this range accounts for.
+                    </p>
+                    <label class="rad-def-label">Length Distribution -</label>
+                    <p>
+                        The length distribution input allows you to specify how fragment sizes should be grouped together on the graph.
+                        <br><br>
+                        <label class="rad-ex-label">Example 1:</label>
+                        If your graph range and focus range are set to the range 1-100, and you specify a length distribution of 50 without outliers, there will be 2 distributions along the x axis. One distrubtion will be the amount of fragments with the length between 1bp-50bp, and the other distribution will be the amount of fragments with the length between 51bp-100bp.
+                        <br>
+                        1) 1bp-50bp
+                        <br>
+                        2) 51bp-100bp
+                        <br>
+                        <a id="length_distribution_ex1_link" href="#">Example Output</a>
+                        <br><br>
+                        <label class="rad-ex-label">Example 2:</label>
+                        If your graph range and focus range are set to the range 1-80, and you specify a length distribution of 50 without outliers, there will be 2 distributions along the x axis. One distrubtion will be the amount of fragments with the length between 1bp-50bp, and the other distribution will be the amount of fragments with the length between 51bp-80bp.
+                        <br>
+                        1) 1bp-50bp
+                        <br>
+                        2) 51bp-80bp
+                        <br>
+                        <a id="length_distribution_ex2_link" href="#">Example Output</a>
+                        <br><br>
+                        <label class="rad-ex-label">Example 3:</label>
+                        If your graph range is set to 1-100 and your focus range is set to 20-30, and you specify a length distribution of 50 without outliers, there will be 4 distributions along the x axis.
+                        <br>
+                        1) 1bp-19bp
+                        <br>
+                        2) 20bp-30bp
+                        <br>
+                        3) 31bp-80bp
+                        <br>
+                        4) 81bp-100bp
+                        <br>
+                        <a id="length_distribution_ex3_link" href="#">Example Output</a>
+                    </p>
+                    <label class="rad-def-label">Include Outliers -</label>
+                    <p>
+                        The include outliers input allows you to include an additional distribution for the amount of fragments outside the graph range minimum, and an extra distribution for the amount of fragments outside the graph range maximum.
+                        <br><br>
+                        <label class="rad-ex-label">Example:</label>
+                        If your graph range and focus range are set to the range 101-200, and you specify a length distribution of 50 with outliers, there will be 4 distributions along the x axis. One distrubtion will be the amount of fragments with the length between 101bp-150bp, and another distribution will be the amount of fragments with the length between 151bp-200bp. Additionally, there will be 2 more distributions. One will be the amount of fragments with a length less than 101bp, and the other one will be the amount of fragments greater than 200bp.
+                        <br>
+                        1) &lt;101bp
+                        <br>
+                        2) 101bp-150bp
+                        <br>
+                        3) 151bp-200bp
+                        <br>
+                        4) 200bp&lt;
+                        <br>
+                        <a id="include_outliers_ex_link" href="#">Example Output</a>
+                    </p>
+                </div>
+            </div>
+            <div class="rad-popup-footer">
+                <button class="btn btn-primary rad-popup-close-btn" type="button" onclick="closeGraphInfoPopup()">Close</button>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+
+            <!---------------- Analysis Input Form ----------------->
+            <div class="col-lg-5 padding-top-lg">
+                <div class="card rad-card margin-center" id="analysis_card">
+                    <div class="rad-card-header">
+                        <h3 class="card-title rad-card-text-header">RAD-Seq Fragment Analysis</h3>
+                    </div>
+                    <hr>
+                    <div class="card-body rad-card-body">
+                        <p id="error" class="rad-card-error-message text-center display-none"></p>               
+                        <form id="analysis_form" name="analysis_form" action="/" method="post">
+                            <div class="container-fluid">
+                                            
+                                <!---------------- Analysis Input Properties ----------------->
+                                <p class="rad-input-properties-header">Analysis Properties</p> <a id="icon-question-a" href="#"><div class="icon-question-container"><i class="fas fa-question icon-question"></i></div></a>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="enzyme_select">Restriction Enzyme</label>
+                                            <div class="input-group">
+                                                <select class="form-control" onchange="onSelectEnzyme(this);" name="enzyme_select" id="enzyme_select">
+                                                    <option>&lt&ltcustom&gt&gt</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="enzyme_site">Restriction Site</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="enzyme_site" name="enzyme_site" type="text" minlength="3" maxlength="9" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row display-none" id="secondEnzymeBlock">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="enzyme_select2">Restriction Enzyme</label>
+                                            <div class="input-group">
+                                                <select class="form-control" onchange="onSelectEnzyme2(this);" name="enzyme_select2" id="enzyme_select2">
+                                                    <option>&lt&ltcustom&gt&gt</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="enzyme_site">Restriction Site</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="enzyme_site2" name="enzyme_site2" type="text" minlength="3" maxlength="9">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="doubleDigest" style="display: flex; align-items: center;">
+                                            <input id="doubleDigest" class="rad-checkbox" name="doubleDigest" type="checkbox" onchange="showRestrictionSite2(this)">&nbsp;Double Digest
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="genome_file">Genome File</label>
+                                            <div class="input-group">
+                                                <input type="file" id="genome_file" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="probability">Slice Probability</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="probability" id="probability" step="0.001" value="1.000" min="0.001" max="1.000" onchange="updateToFixed()" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!---------------- Graph Input Properties ----------------->
+                                <p class="rad-input-properties-header">Graph Properties</p> <a id="icon-question-g" href="#"><div class="icon-question-container"><i class="fas fa-question icon-question"></i></div></a>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="length_distribution">Length Distribution</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="length_distribution" id="length_distribution" step="1" value="50" min="1" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="graph_range_min">Graph Range Min</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="graph_range_min" id="graph_range_min" step="1" value="1" min="1" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="graph_range_max">Graph Range Max</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="graph_range_max" id="graph_range_max" step="1" value="1000" min="1" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="outlier">Include Outliers</label>
+                                            <div class="input-group">
+                                                <input class="rad-checkbox" id="outlier" name="outlier" type="checkbox">
+                                            </div>
+                                        </div>                           
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="focus_range_min">Focus Range Min</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="focus_range_min" id="focus_range_min" step="1" value="1" min="1" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="focus_range_max">Focus Range Max</label>
+                                            <div class="input-group">
+                                                <input class="form-control" type="number" name="focus_range_max" id="focus_range_max" step="1" value="1000" min="1" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="display-none" id="analysis_loading_block">
+                                    <div class="progress" id="progress_bar_block">
+                                        <div
+                                        id="progress_bar"
+                                        class="progress-bar"
+                                        role="progressbar"
+                                        ></div>
+                                    </div>
+                                    <div class="rad-load-block">
+                                        <h5 class="rad-load-label">Analyzing</h5>
+                                        <div class="spinner-border" role="status">
+                                            <span class="sr-only"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="rad-button margin-center" type="button" onclick="performAnalysis()" id="analysis_button">Get Analysis</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!---------------- Result Output ----------------->
+            <div class="col-lg-7 inner-center padding-top-lg">
+                <hr style="margin-top: 0px;">
+                <h3 class="inner-center">Results</h3>
+                <hr>
+                <div class="container-fluid rad-data-table-container" id="fragment_table_container">
+                </div>
+                <div class="chart-container">
+                    <canvas id="fragment_chart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+        
+    <!-- Bootstrap Scripts -->
+    <script src="../../lib/jquery/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="../../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- My Scripts -->
+    <script type="module" src="../scripts/class/rad_analyzer.js"></script>
+    <script src="../scripts/class/data_table_builder.js"></script>
+    <script src="../scripts/rad-seq.js"></script>
+    </body>
+
+
+</html>

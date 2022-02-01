@@ -1,0 +1,414 @@
+/* Global selectors */
+
+body {
+    background-color: rgba(210,210,210,1);
+    padding: 0px 20px 30px;
+}
+
+label{
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+hr{
+    margin: 8px 0px;
+}
+
+h5{
+    margin: 0px 0px;
+}
+
+label{
+    font-size: 1rem;
+}
+
+
+/* Display, Layout Classes */
+
+.margin-center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inner-center{
+    display: block;
+    text-align: center;
+}
+
+.display-block{
+    display: block;
+}
+
+.margin-top-sm{
+    margin-top: 8px;
+}
+
+.margin-top-md{
+    margin-top: 16px;
+}
+
+.margin-top-lg{
+    margin-top: 24px;
+}
+
+.margin-top-xlg{
+    margin-top: 48px;
+}
+
+.margin-top-xxlg{
+    margin-top: 96px;
+}
+
+
+.width-80{
+    width: 80%;
+}
+
+.display-none{
+    display: none !important;
+}
+
+.display-table{
+    display: table;
+}
+
+.display-flex{
+    display: flex;
+}
+
+.font-weight-bold{
+    font-weight: bold;
+}
+
+.padding-top-lg{
+    padding-top: 32px;
+}
+
+
+/* Navbar styles */
+
+.navbar{
+    box-shadow: 0 0 13px 3px rgba(0,0,0,.5);
+    padding-left: 1rem;
+    padding-right: 2rem;
+}
+
+.nav-button{
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    display: inline-block;
+    border: 2px solid transparent;
+}
+
+.nav-button:hover {
+    border: 2px solid rgba(255,255,255,.5);
+    background: linear-gradient(#77b2b0, #416b68);
+ }
+
+ .nav-button:active{
+    background: linear-gradient(#416b68, #6da5a3);
+ }
+
+ .borderless{
+     border: none;
+ }
+
+ .nav-dropdown-button{
+    text-decoration: none; 
+    color: rgba(255,255,255,.5);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    display: inline-block;
+ }
+
+ .nav-dropdown-button:hover{
+    background: linear-gradient(#77b2b0, #416b68);
+    border: 2px solid rgba(255,255,255,.5);
+    color: white;
+    text-decoration: none;
+ }
+
+ .nav-dropdown-button:active{
+    background: linear-gradient(#416b68, #6da5a3);
+    text-decoration: none;
+ }
+
+ .nav-dropdown-button:focus{
+     border: 2px solid #6da5a3;
+     box-shadow: none;
+     text-decoration: none;
+ }
+
+
+ /* Bootstrap classes */
+
+ .form-control:focus{
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(48, 197, 83, 0.25);
+}
+
+.progress-bar{
+    width: 0%; 
+    transition: none;
+}
+
+
+/*Icon Classes*/
+
+.icon-question{
+    color: white;
+    vertical-align: middle;
+    font-size: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.icon-question-container:hover{
+    background-image: linear-gradient(to bottom right,#83EAF1,#63A4FF);
+}
+
+.icon-question-container{
+    background-image: linear-gradient(to bottom right,#09C6F9,#045DE9);
+    display: inline-block;
+    border-radius: 100%;
+    width: 1.7rem;
+    height: 1.7rem;
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+/*Chart classes */
+
+.chart-container{
+    min-width: 400px;
+    min-height: 400px;
+    max-height: 600px;
+    width: 100%;
+    height: 100%;
+    padding: 0px 50px 0px 0px;
+}
+
+.chart-canvas{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* Rad Card styles */
+
+.rad-card{
+    width: 100%; 
+    min-width: 430px; 
+    max-width: 600px; 
+    border-radius: 20px;
+    background: rgb(240, 240, 240);
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2);
+}
+
+.rad-card-header{
+    padding: 20px 20px 0px;
+}
+
+.rad-card-body{
+    padding: 10px 30px 30px;
+}
+
+.rad-card-footer{
+    text-align: center;
+    background: rgb(240, 240, 240);
+    overflow: hidden; 
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.rad-card-text-header{
+    text-align: center;
+    font-weight: bold;
+}
+
+.rad-card-error-message{
+    color: red;
+    font-weight: bold;
+}
+
+.rad-card-success-message{
+    color: green;
+    font-weight: bold;
+}
+
+
+/* Rad Components */
+
+.rad-button {
+    font-weight: bold;
+    min-width: 138px;
+    min-height: 44px;
+	width: auto;
+	height: auto;
+    border: 1px solid #253737;
+    background: linear-gradient(#6da5a3, #416b68);
+    border-radius: 15px;
+    box-shadow: rgba(255,255,255,0.1) 0 1px 0, inset rgba(255,255,255,0.7) 0 1px 0;
+    text-shadow: #333333 0 1px 0;
+    color: #e1e1e1;
+    margin-top: 30px;
+}
+
+.rad-button:hover {
+    border: 1px solid #253737;
+    text-shadow: #333333 0 1px 0;
+    background: linear-gradient(#77b2b0, #416b68);
+    color: #fff;
+ }
+
+.rad-button:active {
+    text-shadow: #333333 0 -1px 0;
+    border: 1px solid #253737;
+    background: linear-gradient(#416b68, #6da5a3);
+    color: #fff;
+    box-shadow: rgba(255,255,255,0) 0 1px 0, inset rgba(255,255,255,0.7) 0 1px 0;
+}
+
+.rad-checkbox{
+    width: 1.2rem; 
+    height: 1.2rem; 
+}
+
+.rad-load-block{
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 30px;
+}
+
+.rad-load-label{
+    display: inline; 
+    margin-right: 15px; 
+    font-weight: bold;
+}
+
+.rad-data-table-container{
+    margin: 0px;
+}
+
+.rad-data-table{
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+    display: table;
+}
+
+.rad-th{
+    padding: 5px;
+    font-size: 0.95rem;
+    text-align: center;
+    width: 20%;
+}
+
+.rad-td{
+    padding: 5px;
+    text-align: center;
+    width: 20%;
+    font-size: 1rem;
+}
+
+.rad-data-table, .rad-th, .rad-td {
+    border:1px solid black;
+}
+
+.rad-outlier-label{
+    font-size: 1rem;
+}
+
+
+.rad-navbar-brand-data-tables{
+    border-right: 2px solid rgba(255, 255, 255, 0.8); 
+    padding-right: 10px;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.rad-navbar-data-tables{
+    box-shadow: none;
+    border-radius: 20px;
+}
+
+
+.rad-input-properties-header{
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: bottom;
+    margin: 5px 0px 0px;
+}
+
+
+.rad-popup-box{
+    padding: 8px;
+    position: fixed;
+    width: 70%;
+    height: 80%;
+    min-width: 350px;
+    min-height: 300px;
+    left: 0px;
+    right: 0px;
+    margin: 96px auto 0px;
+    background: rgb(240, 240, 240);
+    z-index: 9999999;
+    text-align: center;
+    border-radius: 20px;
+}
+
+
+.rad-popup-body{
+    height: 75%;
+}
+
+.rad-popup-header{
+    height: 10%;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rad-popup-footer{
+    height: 15%;
+    border-top: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rad-popup-content {
+    height: 100%;
+    padding:20px;
+    z-index: 2000;
+    text-align: left;
+    overflow-y: scroll;
+}
+
+.rad-shadow{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+}
+
+.rad-def-label{
+    font-size: 1.2rem;
+    display: block;
+    margin-top: 32px;
+}
+
+.rad-ex-label{
+    color: rgb(200, 0, 0);
+    display: block;
+}
