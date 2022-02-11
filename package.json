@@ -9,9 +9,9 @@
   "author": "Kyle",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^16.0.8"
+    "electron": "^16.0.8",
+    "electron-wix-msi": "^3.2.0"
   },
   "dependencies": {
-    "electron-wix-msi": "^3.2.0"
   }
 }
