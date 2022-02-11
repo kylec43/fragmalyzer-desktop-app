@@ -214,7 +214,7 @@ function parseRestrictionSite(site){
             sliceOffset = pipeIndex;
             siteUpper = siteUpper.replace("|", "");
         } else {
-            sliceOffset = siteUpper.length/2;
+            sliceOffset = Math.floor(siteUpper.length/2);
         }
         return {site: siteUpper, sliceOffset};
     }

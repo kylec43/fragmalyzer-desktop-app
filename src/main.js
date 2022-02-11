@@ -11,7 +11,6 @@ const createWindow = () => {
         }
     });
 
-    win.removeMenu();
     win.maximize();
     win.loadFile("src/views/rad-seq.html");
     win.show();

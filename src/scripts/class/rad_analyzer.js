@@ -197,6 +197,11 @@ function getFragmentDistributions(fragmentSizes, config){
             fragmentDistributionsMiddle[index].count += fragmentSizes[size];
         } else if(size > config.focusRangeMax && size <= config.graphRangeMax && fragmentDistributionsEnd.length > 0){
             let index = Math.floor((size-(config.focusRangeMax+1))/config.lengthDistribution);
+            if(fragmentDistributionsEnd[index] === undefined){
+                console.log(`Error index is ${index}`);
+                console.log(`Error Focus range max + 1 is ${config.focusRangeMax+1}`);
+                console.log(`Error size is ${size}`);
+            }
             fragmentDistributionsEnd[index].count += fragmentSizes[size];
         } else if (size < config.graphRangeMin){
             outliersBegin[0].count += fragmentSizes[size];
