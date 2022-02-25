@@ -1,4 +1,4 @@
-<h2> RAD-Seq Fragment Analysis Desktop App</h2>
+<h2> FRAGmalyzer Desktop App</h2>
 (Experimental)
 
 Download compressed installer: 
