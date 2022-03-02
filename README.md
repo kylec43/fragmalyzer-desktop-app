@@ -1,5 +1,4 @@
 <h2> FRAGmalyzer Desktop App</h2>
-(Experimental)
 
 Download compressed installer: 
 [Part 1](https://drive.google.com/file/d/19D0UDHV69hzQv4mXGvy7_5yvM8ZZjXdh/view?usp=sharing)
