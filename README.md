@@ -2,5 +2,5 @@
 (Experimental)
 
 Download compressed installer: 
-[Part 1](https://github.com/kylec43/rad-sequence-desktop-app/raw/master/rad-seq%20Setup%201.0.0.7z.001)
-[Part 2](https://github.com/kylec43/rad-sequence-desktop-app/raw/master/rad-seq%20Setup%201.0.0.7z.002)
+[Part 1](https://drive.google.com/file/d/19D0UDHV69hzQv4mXGvy7_5yvM8ZZjXdh/view?usp=sharing)
+[Part 2](https://drive.google.com/file/d/1GcPRuWiHPD0OTXI0sv_1DWTV5Z7u-h9a/view?usp=sharing)
